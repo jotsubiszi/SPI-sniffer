@@ -1,17 +1,4 @@
-#include "pinConf.h"
-#include <stdint.h>
-
-typedef struct {
-
-  char tabINT[32];
-
-  uint8_t INTCharCounter;
-
-  uint8_t INTTabCounter;
-
-  uint8_t INTChar;
-
-} sniffin;
+#include "spiSniffing.h"
 
 void sniffMosi(sniffin *snif) {
   uint8_t sniffedINTBit = readPinMOSI();

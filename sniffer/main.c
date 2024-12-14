@@ -1,15 +1,19 @@
-#include "pinConf.h"
+#include "spiSniffing.h"
 #include <avr/common.h>
 #include <avr/interrupt.h>
 
-ISR(INT0_vect) {}
+sniffin MISO;
+sniffin MOSI;
 
-ISR(INT1_vect) {}
+ISR(INT0_vect) { sniffMiso(&MISO); }
+
+ISR(INT1_vect) { sniffMosi(&MOSI); }
 
 // The interrupt execution response for all the enabled AVR® interrupts is four
 // clock cycles minimum
 
 int main(void) {
+  pinsInit();
 
   pinsInit();
   sei();
@@ -21,5 +25,8 @@ int main(void) {
   // INT0 on rising
   // INT1 on falling
   EIMSK = 0b00000011;
+
+  while (1 == 1) {
+  }
   return 0;
 }
