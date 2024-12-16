@@ -1,20 +1,22 @@
 #include "spiSniffing.h"
+#include "uarting.h"
 #include <avr/common.h>
 #include <avr/interrupt.h>
 
 sniffin MISO;
 sniffin MOSI;
 
-ISR(INT0_vect) { sniffMiso(&MISO); }
+ISR(INT0_vect) { sniffMiso(&MOSI); }
 
-ISR(INT1_vect) { sniffMosi(&MOSI); }
+ISR(INT1_vect) { printf("%c\r\n", MOSI.INTChar); }
 
 // The interrupt execution response for all the enabled AVR® interrupts is four
 // clock cycles minimum
 
 int main(void) {
-  pinsInit();
 
+  pinsInit();
+  USART0_init();
   pinsInit();
   sei();
   // The I-bit is cleared by hardware after an interrupt has occurred, and
