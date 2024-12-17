@@ -1,6 +1,6 @@
 TARGET=sniffer
 
-SRC=main.c
+SRC=pinConf.c spiSniffing.c uarting.c main.c
 OBJ=$(SRC:.c=.o)
 
 CC=avr-gcc
@@ -19,13 +19,3 @@ $(TARGET).elf: $(OBJ)
 
 clean: 
 	rm -rf *.o *.elf
-
-$(COMPILE_COMMANDS):
-	$(TOOLS_DIR)/compile_commands_with_extra_include_paths.sh > $@
-
-dev: $(COMPILE_COMMANDS)
-
-dev-clean:
-	rm -rf $(COMPILE_COMMANDS)
-
-.PHONY: clean dev dev-clean
