@@ -8,20 +8,12 @@ uint8_t flag;
 
 ISR(INT1_vect) { flag = 1; }
 
-// The interrupt execution response for all the enabled AVR® interrupts is four
-// clock cycles minimum
-
 int main(void) {
   pinsInit();
   USART0_init();
   sei();
-  // The I-bit is cleared by hardware after an interrupt has occurred, and
-  // is set by the RETI instruction to enable subsequent interrupts.
-  // The I-bit can also be set and cleared by the application with the
-  // SEI and CLI instructions, as described in the instruction set reference.
+
   EICRA = 0b00001000;
-  // INT0 on rising
-  // INT1 on falling
   EIMSK = 0b00000010;
   uint8_t counter = 0;
   uint8_t shiftMiso = 0;
@@ -37,7 +29,7 @@ int main(void) {
       flag = 0;
     }
 
-    if (counter == 8) {
+    if (counter >= 8) {
       printf("MISO: %i\r\n", shiftMiso);
       printf("MOSI: %i\r\n", shiftMosi);
       counter = 0;

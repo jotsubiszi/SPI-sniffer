@@ -2,5 +2,4 @@
 #include <stdint.h>
 
 void pinsInit();
-uint8_t readPinMISO();
-uint8_t readPinMOSI();
+uint8_t readPort();
