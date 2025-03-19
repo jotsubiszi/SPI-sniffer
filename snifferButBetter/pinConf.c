@@ -12,4 +12,4 @@ void pinsInit() {
   PORTB = 0b00000000;
 }
 
-uint8_t readPort() { return PINB; }
+uint8_t readPort() { return PIND; }
